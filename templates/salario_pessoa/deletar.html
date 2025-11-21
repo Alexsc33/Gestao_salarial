@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow border-0 rounded-4 overflow-hidden">
+
+    <div class="card-header bg-danger text-white text-center py-4">
+      <h1 class="h4 mb-0 fw-bold">Confirmar Exclusão</h1>
+    </div>
+
+    <div class="card-body p-5">
+      <p class="lead text-center">
+        Tem certeza de que deseja excluir a relação<br>
+        <strong>{{ object }}</strong>?
+      </p>
+
+      <form method="post" class="d-flex justify-content-center gap-4 mt-5">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger px-4">Sim, Excluir</button>
+        <a href="{% url 'salario_pessoa_listar' %}" class="btn btn-secondary px-4">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

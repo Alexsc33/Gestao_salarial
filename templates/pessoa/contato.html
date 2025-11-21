@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulario de Contato</title>
+    </head>
+    <body>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{messge}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit">Enviar</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Contato{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow border-0 rounded-4 overflow-hidden">
+
+    <!-- Cabeçalho -->
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h1 class="h4 mb-0 fw-bold">Detalhes do Funcionário</h1>
+    </div>
+
+    <div class="card-body p-5">
+
+      {% if messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <ul class="mb-0 list-unstyled">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="bg-light" style="width: 180px;">Nome:</th>
+            <td>{{ contato.nome }}</td>
+          </tr>
+          <tr>
+            <th class="bg-light">Email:</th>
+            <td>{{ contato.email }}</td>
+          </tr>
+          {% if contato.cpf %}
+          <tr>
+            <th class="bg-light">CPF:</th>
+            <td>{{ contato.cpf }}</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <th class="bg-light">Idade:</th>
+            <td>{{ contato.idade }}</td>
+          </tr>
+          {% if contato.mensagem %}
+          <tr>
+            <th class="bg-light">Mensagem:</th>
+            <td>{{ contato.mensagem }}</td>
+          </tr>
+          {% endif %}
+          {% if contato.data_envio %}
+          <tr>
+            <th class="bg-light">Data de Envio:</th>
+            <td>{{ contato.data_envio|date:"d/m/Y H:i" }}</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      <!-- Botões -->
+      <div class="d-flex justify-content-end gap-3 mt-4">
+       <a href="{% url 'contato_update' pk=contato.pk %}" class="btn btn-sm btn-warning">Editar</a>
+        </a>
+            <a href="{% url 'contato_delete' pk=contato.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+        </a>
+        <a href="{% url 'contato_list' %}" class="btn btn-primary">
+          Voltar para a Lista
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

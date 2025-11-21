@@ -1,0 +1,60 @@
+<!-- app/templates/app/funcionarios_list.html -->
+{% extends 'base.html' %}
+{% block title %}Lista de Funcionários{% endblock %}
+{% block content %}
+<div class="container py-5">
+<div class="card shadow border-0 rounded-4 overflow-hidden">
+<!-- Cabeçalho -->
+<div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+<h1 class="h4 mb-0 fw-bold">Lista de Funcionários</h1>
+<a href="{% url 'contato_create' %}" class="btn btn-light btn-sm">
+ + Adicionar Novo Funcionário
+</a>
+</div>
+<div class="card-body p-4">
+ {% if messages %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+<ul class="mb-0 list-unstyled">
+ {% for message in messages %}
+<li>{{ message }}</li>
+ {% endfor %}
+</ul>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+</div>
+ {% endif %}
+ {% if contatos %}
+<div class="table-responsive">
+<table class="table table-hover align-middle">
+<thead class="table-dark">
+<tr>
+<th class="fw-bold">Nome</th>
+<th class="fw-bold">Email</th>
+<th class="fw-bold">Idade</th>
+<th class="fw-bold text-center">Ações</th>
+</tr>
+</thead>
+<tbody>
+ {% for contato in contatos %}
+<tr>
+<td class="fw-semibold">{{ contato.nome }}</td>
+<td>{{ contato.email }}</td>
+<td>{{ contato.idade }}</td>
+<td class="text-center">
+<div class="d-flex gap-2 justify-content-center">
+<a href="{% url 'contato_detail' pk=contato.pk %}" class="btn btn-sm btn-outline-info">Ver</a>
+<a href="{% url 'contato_update' pk=contato.pk %}" class="btn btn-sm btn-outline-warning">Editar</a>
+<a href="{% url 'contato_delete' pk=contato.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+</div>
+</td>
+</tr>
+ {% endfor %}
+</tbody>
+</table>
+</div>
+ {% else %}
+<div class="alert alert-info text-center mt-3 mb-0">Nenhum funcionário encontrado.</div>
+ {% endif %}
+</div>
+</div>
+</div>
+{% endblock %}

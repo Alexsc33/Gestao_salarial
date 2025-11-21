@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow border-0 rounded-4 overflow-hidden">
+
+    <!-- Cabeçalho -->
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h1 class="h3 mb-0 fw-bold">{{ titulo }}</h1>
+    </div>
+
+    <div class="card-body p-5">
+
+      {% if messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <ul class="mb-0 list-unstyled">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Pessoa -->
+        <div class="mb-4">
+          <label for="{{ form.pessoa.id_for_label }}" class="form-label fw-bold">Pessoa</label>
+          {{ form.pessoa }}
+          {% for error in form.pessoa.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <!-- Salário -->
+        <div class="mb-4">
+          <label for="{{ form.salario.id_for_label }}" class="form-label fw-bold">Salário</label>
+          {{ form.salario }}
+          {% for error in form.salario.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <!-- Botões -->
+        <div class="d-flex justify-content-end gap-3 mt-5">
+          <button type="submit" class="btn btn-success btn-lg px-4 rounded-pill shadow-sm">
+            Salvar
+          </button>
+          <a href="{% url 'salario_pessoa_listar' %}" class="btn btn-outline-secondary btn-lg px-4 rounded-pill shadow-sm">
+            Voltar
+          </a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

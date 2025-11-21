@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %} {# <-- Add this line at the very top to load static files #}
+
+{% block title %}Página Inicial - Sistema de Gestão de Funcionários{% endblock %}
+
+{% block content %}
+
+<section class="hero-section text-center py-5 mb-5">
+    <div class="hero-content">
+        <h1 class="display-4 fw-bold text-dark mb-4">
+            Bem-vindo ao <span class="text-primary">Sistema de Gestão de Funcionários</span>
+        </h1>
+        <p class="lead text-muted mb-5 mx-auto" style="max-width: 600px;">
+            Otimize a gestão dos seus Funcionários com uma plataforma intuitiva e completa. Desenvolvida para impulsionar a eficiência e o bem-estar da sua equipe.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{% url 'contato_list' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+                <i class="fas fa-sign-in-alt me-2"></i>Acessar o Sistema
+            </a>
+        </div>
+
+    </div>
+</section>
+
+{# <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}"> #}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+{# <link rel="stylesheet" href="{% static 'app/css/home_styles.css' %}"> #}
+
+
+<script src="{% static 'app/js/home_script.js' %}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
+
+{% endblock %}

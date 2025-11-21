@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulario de Salario</title>
+
+        <nav>
+            <a href="{% url 'pessoa_listar' %}">Pessoas</a> |
+            <a href="{% url 'salario_listar' %}">Salários</a> |
+            <a href="{% url 'salario_pessoa_listar' %}">Relação Pessoa-Salário</a>
+        </nav>
+        
+    </head>
+    <body>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{messge}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit">Enviar</button>
+        </form>
+    </body>
+</html>

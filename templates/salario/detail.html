@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Salário{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow border-0 rounded-4 overflow-hidden">
+
+    <!-- Cabeçalho -->
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h1 class="h4 mb-0 fw-bold">Detalhes do Salário</h1>
+    </div>
+
+    <div class="card-body p-5">
+
+      {% if messages %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <ul class="mb-0 list-unstyled">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th class="bg-light" style="width: 180px;">Valor:</th>
+            <td>{{ salario.valor }}</td>
+          </tr>
+          <tr>
+            <th class="bg-light">Anos de trabalho:</th>
+            <td>{{ salario.anos_de_trabalho }}</td>
+          </tr>
+          {% if contato.mensagem %}
+          <tr>
+            <th class="bg-light">Mensagem:</th>
+            <td>{{ contato.mensagem }}</td>
+          </tr>
+          {% endif %}
+          {% if contato.data_envio %}
+          <tr>
+            <th class="bg-light">Data de Envio:</th>
+            <td>{{ contato.data_envio|date:"d/m/Y H:i" }}</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      <!-- Botões -->
+      <div class="d-flex justify-content-end gap-3 mt-4">
+       <a href="{% url 'update' pk=salario.pk %}" class="btn btn-sm btn-warning">Editar</a>
+        </a>
+            <a href="{% url 'delete' pk=salario.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+        </a>
+        <a href="{% url 'list' %}" class="btn btn-primary">
+          Voltar para a Lista
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
