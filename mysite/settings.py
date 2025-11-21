@@ -115,6 +115,10 @@ DATABASES = {
     )
 }
 
+ALLOWED_HOSTS = [
+    'Gestao_salarial.onrender.com', # Substitua pelo nome do seu Web Service
+    # Adicione outros hosts se necessário (como o host local para desenvolvimento)
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
