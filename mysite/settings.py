@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$xaspo6di%d(1utaw50ux9lw-f+x@x+%abr0+!iv+p057^0(ev'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['admin.pythonanywhere.com']
 
 # Application definition
 
@@ -108,17 +107,12 @@ LOGIN_URL = '/admin/login/'
 
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=False,  # pode deixar assim no Render
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', 
+    }
 }
 
-ALLOWED_HOSTS = [
-    'Gestao_salarial.onrender.com', # Substitua pelo nome do seu Web Service
-    # Adicione outros hosts se necessário (como o host local para desenvolvimento)
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
